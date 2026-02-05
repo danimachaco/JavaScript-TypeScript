@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        prompt("hay estas figuras: cuadrado, rectangulo, triangulo, pentagono, hexagono, rombo, circulo")
+        let figura = prompt("dime una figura geometrica");
+        switch (figura) {
+            case "cuadrado":
+                let lado = parseInt(prompt("dime la longitud del lado"));
+                let perimetroC=lado*4;
+                let areaC=lado^2;
+                document.write("perimetro "+perimetroC);
+                document.write("area "+areaC);
+                break;
+            case "rectangulo":
+                let baseR = parseInt(prompt("dime la base"));
+                let alturaR = parseInt(prompt("dime la altura"));
+                let perimetroR=base*2+altura*2;
+                let areaR=base*altura;
+                document.write("perimetro "+perimetroR);
+                document.write("area "+areaR);
+                break;
+            case "triangulo":
+                let baseT = parseInt(prompt("dime la base"));
+                let alturaT = parseInt(prompt("dime la altura"));
+                let perimetroT=base*3;
+                let areaT= (base*altura)/2;
+                document.write("perimetro "+perimetroT);
+                document.write("area "+areaT);
+                break;
+            case "pentagono":
+                let ladoP = parseInt(prompt("dime la longitud del lado"));
+                let apotemaP = parseInt(prompt("dime la apotema"));
+                let perimetroP=lado*5;
+                let areaP= (perimetroP*apotemaP)/2;
+                document.write("perimetro "+perimetroP);
+                document.write("area "+areaP);
+                break;
+            case "hexagono":
+                let ladoH = parseInt(prompt("dime la longitud del lado"));
+                let apotemaH = parseInt(prompt("dime la apotema"));
+                let perimetroH=lado*5;
+                let areaH= (perimetroH*apotemaH)/2;
+                document.write("perimetro "+perimetroH);
+                document.write("area "+areaH);
+                break;
+            case "rombo":
+                let ladoRombo = parseInt(prompt("dime la longitud del lado"));
+                let d = parseInt(prompt("dime la distancia menor"));
+                let D = parseInt(prompt("dime la distancia mayor"));
+                let perimetroRombo=lado*4;
+                let areaRombo= (D*d)/2;
+                document.write("perimetro "+perimetroRombo);
+                document.write("area "+areaRombo);
+                break;
+            case "circulo":
+                let radio = parseInt(prompt("dime el radio"));
+                let perimetroCirculo =2*3.141592*radio;
+                let areaCirculo = 3.141592*radio^2;
+                document.write("perimetro "+perimetroCirculo);
+                document.write("area "+areaCirculo);
+                break;
+
+
+        }
+    </script>
+</body>
+</html>

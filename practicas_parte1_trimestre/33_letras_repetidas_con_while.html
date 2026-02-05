@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numero = parseInt(prompt("dame un numero"));
+        let letra = prompt("dame una letra");
+        let contador = 0;
+        if(letra=="x"||letra=="y"){
+            if(numero>0 && numero<16){
+                do{
+                contador++
+                document.writeln(letra)
+                }
+                while(contador<numero)
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numero = parseFloat(prompt("cuantas notas tienes"));
+        let suma = 0;
+        for (let index = 0; index < numero; index++) {
+            let nota = parseFloat(prompt("dime una nota"))
+            suma=suma+nota
+        }
+        let resultado = suma /numero;
+        document.write(resultado);
+    </script>
+</body>
+</html>

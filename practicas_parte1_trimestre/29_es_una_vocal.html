@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let letra=prompt("dame una letra");
+        let contadorV=0;
+        let contadorC=0;
+        while(letra!="0"){
+            if (letra=="a"||letra=="e"||letra=="i"||letra=="o"||letra=="u"){
+                contadorV++;
+            }
+            else{contadorC++}
+            letra=prompt("dame una letra");
+
+        }
+        document.write("Numero de consonantes "+contadorC);
+        document.write("<br>");
+        document.write("Numero de vocales "+contadorV);        
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let lista=[];
+        let numero;
+        let pares=0;
+        let impares=0;
+        let i=0;
+
+        do{
+            numero=parseInt(prompt("dame numeros"));
+            if(numero !=0 && !isNaN(numero)){
+                lista[i]=numero
+                i++
+            }
+        }
+        while(numero !=0 && !isNaN(numero))
+
+        alert("lista de numeros")
+
+        for (let index = 0; index < lista.length; index++) {
+           if (lista[index] % 2 == 0){
+            pares++
+           }
+           else{
+            impares++
+            }
+            
+        }
+
+        document.write("Cantidad de numeros pares: "+pares);
+        document.writeln("<br>");
+        document.write("Cantidad de numeros impares: "+impares);
+
+    </script>
+</body>
+</html>

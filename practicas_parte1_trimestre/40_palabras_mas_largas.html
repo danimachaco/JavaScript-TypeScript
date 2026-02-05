@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let palabras = ["pirry","asier","machaco"];
+        let numerocaracteres=parseInt(prompt("dime un numero"));
+        let palabrasbuenas=[];
+
+        for (let index = 0; index < palabras.length; index++) {
+            
+            if (palabras[index].length>numerocaracteres){
+
+                palabrasbuenas.push(palabras[index])
+            }
+        }
+
+        document.writeln(palabrasbuenas);
+
+    </script>
+</body>
+</html>

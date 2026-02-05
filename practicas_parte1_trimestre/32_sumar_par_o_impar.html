@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numero=parseInt(prompt("dame un numero"));
+        let contador = 0;
+        while (numero!=0){
+            contador=contador+numero;
+            numero=parseInt(prompt("dame un numero"));
+        }
+        while(contador%2==0){
+            numero=parseInt(prompt("dame un numero"));
+            contador=contador+numero;
+        }
+        document.writeln("la suma es :"+contador);
+
+    </script>
+</body>
+</html>

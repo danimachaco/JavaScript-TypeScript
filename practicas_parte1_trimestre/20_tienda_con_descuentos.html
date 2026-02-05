@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let articulos = parseInt(prompt("cuantos articulos iguales llevas"));
+        let precio = parseInt(prompt("cuanto cuesta tu articulo"));
+
+        let preciototal= articulos * precio;
+        
+        if (preciototal >= 40){
+            document.write("tenemos un descuento para ti del 15%")
+            document.write("<br>")
+            let descuento=preciototal-(preciototal*0.15);
+            document.writeln("la compra se te queda en "+descuento);
+        }
+    </script>
+</body>
+</html>

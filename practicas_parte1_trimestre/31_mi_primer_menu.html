@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let opcion, mensaje;
+        mensaje = " 1- Leer datos \n2- Mostrar Datos \n3- Fin";
+        while (opcion !=3){
+            opcion = parseInt(prompt("Elegir opcion\n"));
+            switch (opcion){
+            case 1:
+                    alert("Opción: Leer datos");
+                    break;
+            case 2:
+                    alert("Opción: Mostrar datos");
+                    break;
+            case 3:
+                    alert("Opción: Finalizar");
+                    break;
+            default:
+                    alert("Error, opción incorrecta");
+            }
+        }
+    </script>
+</body>
+</html>

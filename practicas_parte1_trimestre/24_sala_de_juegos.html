@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let creditos = parseInt(prompt("cuantos creditos tiene"));
+        switch(creditos){
+            case 4:
+                document.write("puedes acceder a las salas de Consolas, Juegos 2D, Juegos 3D y Realidad Virtual");
+                break;
+            case 3:
+                document.write("puedes acceder a las salas de Juegos 2D, Juegos 3D y Realidad Virtual");
+                break;
+            case 2:
+                document.write("puedes acceder a las salas de Juegos 3D y Realidad Virtual");
+                break;
+            case 1:
+                document.write("puedes acceder a las sala de Realidad Virtual");
+                break;
+            default:
+                document.write("no puedes acceder");
+                break;
+        }
+    </script>
+</body>
+</html>
