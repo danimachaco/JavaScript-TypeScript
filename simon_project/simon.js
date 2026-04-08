@@ -1,14 +1,15 @@
-
+//Constantes y variables globales del proyecto
 const readline = require("readline");
 const tColores = {ROJO: 0, AZUL: 1, VERDE: 2, DORADO: 3};
 let MAX_COLORES_SEQ = [];
 
+//Funcion pregunta del proyecto
 function pregunta(rl, texto) {
   return new Promise((resolve) => {
     rl.question(texto, resolve);
   });
 }
-
+//Funcion main del proyecto, llama a la función comenzarJuego para empezar a jugar.
 async function main() {
     process.stdin.resume();
     const rl = readline.createInterface({
@@ -29,6 +30,7 @@ async function main() {
   rl.close();
 }
 
+//Funcion generarSecuencia, genera una secuencia de colores aleatoria y la devuelve en un array. El parametro que recibe es el número de colores posibles de la secuencia.
 function generarSecuencia ( numeroColoresSec ) {
 
     let contador = 0;
@@ -49,6 +51,7 @@ function generarSecuencia ( numeroColoresSec ) {
     return MAX_COLORES_SEQ;
 }
 
+//Funcion intToColor, recibe un número entero y devuelve el valor TColores correspondiente al número.
 function intToColor ( numero ) {
 
     switch(numero){
@@ -68,6 +71,7 @@ function intToColor ( numero ) {
     }
 }
 
+//Funcion mostrarColor, recibe un valor TColores como parametro y devuelve el nombre del color correspondiente por consola.
 function mostrarColor(valorTColor){
 
     switch(valorTColor){
@@ -86,6 +90,7 @@ function mostrarColor(valorTColor){
     }
 }
 
+//Funcion charToColor, recibe un caracter como parametro y devuelve el valor TColores correspondiente al caracter. El caracter puede ser mayuscula o minuscula (no filtra que sea un caracter invalido, se asume que ha fallado el color).
 function charToColor ( valorToColor ){
 
     let l = valorToColor.toLowerCase()
@@ -107,6 +112,7 @@ function charToColor ( valorToColor ){
     }
 }
 
+//Funcion comprobarColor: recibe la secuencia de colores, la posicion del color a comparar que sirve para comprobar esa misma posicion en la secuencia generada y el color introducido por el usuario. Devuelve true si el color introducido es incorrecto y false si es correcto.
 function comprobarColor ( secuenciaColores , indice , color ) {
 
     let x = charToColor(color)
@@ -124,6 +130,7 @@ function comprobarColor ( secuenciaColores , indice , color ) {
     }
 }
 
+//Funcion mostrarSecuencia, recibe la secuencia de colores y el numero de colores a mostrar. Muestra por consola la secuencia de colores hasta el numero indicado (el juego comienza mostrando los tres primeros colores).
 function mostrarSecuencia ( secuenciaColores , numero ){
 
     for(let i = 0 ; i <= numero ; i++){
@@ -133,6 +140,7 @@ function mostrarSecuencia ( secuenciaColores , numero ){
 
 }
 
+//Funcion comenzarJuego:es la funcion principal del proyecto. Recibe el nombre del jugador y el objeto readline para interactuar con el usuario. Es la funcion que nos mantiene jugando y la que se encarga de llamar a las demas funciones.
 async function comenzarJuego ( nombre , rl ) {
 
     const numColores = 4;
