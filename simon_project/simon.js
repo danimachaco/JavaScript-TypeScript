@@ -56,7 +56,7 @@ function generarSecuencia ( modo, numeroColoresSec ) {
 
         MAX_COLORES_SEQ = 12
 
-        console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
+        // console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
 
         while(contador != MAX_COLORES_SEQ){
 
@@ -65,7 +65,6 @@ function generarSecuencia ( modo, numeroColoresSec ) {
             let valorColorArray = intToColor(entero);
             let colorFinal = mostrarColor(valorColorArray);
             secuenciaGeneral.push(colorFinal);
-
 
             contador++;
 
@@ -80,7 +79,7 @@ function generarSecuencia ( modo, numeroColoresSec ) {
 
         MAX_COLORES_SEQ = 15;
 
-        console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
+        // console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
 
         while(contador != MAX_COLORES_SEQ){
 
@@ -89,7 +88,6 @@ function generarSecuencia ( modo, numeroColoresSec ) {
             let valorColorArray = intToColor(entero);
             let colorFinal = mostrarColor(valorColorArray);
             secuenciaGeneral.push(colorFinal);
-
 
             contador++;
 
@@ -236,29 +234,83 @@ async function comenzarJuego ( nombre , rl , modo ) {
     let juegoTerminado = false;
     let contadorColores = 1;
     let secuenciasAcertadas = 0;
+    let numAyudas = 3;
 
     while (!juegoTerminado && longitudActual <= secuencia.length) {
 
         mostrarSecuencia(secuencia, (longitudActual-1));
 
-        console.log("");
-        console.log(nombre + " introduce la secuencia de colores (R = Rojo, A = Azul, V = Verde, D = Dorado): ")
-        console.log("Cuando lo hayas memorizado pulsa Enter para continuar.");
+        if (modo == tModo.FACIL) {
 
-        await pregunta(rl, "");
+            console.log("");
+            console.log(nombre + " introduce la secuencia de colores (R = Rojo, A = Azul, V = Verde, D = Dorado, x = Ayuda) ")
+            console.log("Ayudas disponibles: " + numAyudas);
+            console.log("Cuando lo hayas memorizado pulsa Enter para continuar.");
 
-        console.clear()
+            await pregunta(rl, "");
+
+            console.clear()
+
+        }
+        else if (modo == tModo.DIFICIL) {
+
+            console.log("");
+            console.log(nombre + " introduce la secuencia de colores (R = Rojo, A = Azul, V = Verde, D = Dorado, B = Blanco, M = Marron, N = Naranja, x = Ayuda) ")
+            console.log("Ayudas disponibles: " + numAyudas);
+            console.log("Cuando lo hayas memorizado pulsa Enter para continuar.");
+
+            await pregunta(rl, "");
+
+            console.clear()
+
+        }
 
         while (!juegoTerminado && longitudActual >= contadorColores ) {
 
             let respuesta = await pregunta(rl,"Color " + contadorColores + ": ");
 
-            let correccion = comprobarColor(secuencia, contadorColores, respuesta);
+            if (respuesta == "x") {
 
-            juegoTerminado = correccion;
+                let ayudaUtilizada = await utilizarAyuda(secuencia, contadorColores, numAyudas);
 
-            contadorColores++;
+                juegoTerminado = ayudaUtilizada;
 
+                contadorColores++;
+
+                numAyudas--;
+
+                if (ayudaUtilizada == true){
+
+                    console.log("No te quedan ayudas disponibles!");
+
+                    let intento = await pregunta(rl, "Color " + (contadorColores - 1 ) + ": ");
+
+                    while (intento == "x") {
+
+                        console.log("No te quedan ayudas disponibles!");
+
+                        intento = await pregunta(rl, "Color " + (contadorColores - 1) + ": ");
+
+                    }
+
+                    let correccion = comprobarColor(secuencia, contadorColores, intento);
+
+                    juegoTerminado = correccion;
+
+                    contadorColores++;
+
+                }
+
+            }
+            else {
+
+                let correccion = comprobarColor(secuencia, contadorColores, respuesta);
+
+                juegoTerminado = correccion;
+
+                contadorColores++;
+
+            }
         }
 
         longitudActual++;
@@ -292,6 +344,23 @@ async function comenzarJuego ( nombre , rl , modo ) {
         console.log("¡FELICIDADES " + nombre + "! HAS COMPLETADO EL JUEGO CON ÉXITO.");
         console.log("");
 
+    }
+}
+
+//Funcion utilizarAyuda: recibe la secuencia de colores, el indice del color a mostrar y el numero de ayudas disponibles. Si hay ayudas disponibles, muestra el color correcto y devuelve false. Si no hay ayudas disponibles, devuelve true para indicar que tiene que probar a acertar el color.
+async function utilizarAyuda ( secuenciaColores , indice, numAyudas ) {
+
+    if (numAyudas > 0) {
+
+        console.log("El color correcto era: " + secuenciaColores[indice - 1]);
+
+        console.log("Ayudas restantes: " + (numAyudas - 1));
+
+        return false;
+    }
+    else {
+
+        return true;
     }
 }
 
