@@ -1,7 +1,14 @@
 //Constantes y variables globales del proyecto
 const readline = require("readline");
-const tColores = {ROJO: 0, AZUL: 1, VERDE: 2, DORADO: 3};
-let MAX_COLORES_SEQ = [];
+const tColores = {ROJO: 0, AZUL: 1, VERDE: 2, DORADO: 3, BLANCO: 4, MARRON: 5, NARANJA: 6};
+const tModo = {FACIL: 1, DIFICIL: 2};
+
+const MAX_COLORES_FACIL = 4;
+const MAX_COLORES_DIFICIL = 7;
+
+let MAX_COLORES_SEQ ;
+let secuenciaGeneral = [];
+
 
 //Funcion pregunta del proyecto
 function pregunta(rl, texto) {
@@ -19,36 +26,78 @@ async function main() {
 
     console.log("¡Bienvenido a Simon dice!");
     const nombre = await pregunta(rl, "¿Cuál es tu nombre? ");
-    console.log(`Hola ${nombre}, pulsa una tecla para empezar a jugar.`);
 
+    console.log(`Elije una opcion para continuar: `);
+    console.log("0: Salir")
+    console.log(`1. Jugar en modo sencillo`);
+    console.log(`2. Jugar en modo dificil `);
+
+    const modo = await pregunta(rl, "Opcion: ");
+
+    console.log(`Hola ${nombre}, pulsa una tecla para empezar a jugar.`);
+    
     await pregunta(rl, "");
 
     console.clear()
 
-    await comenzarJuego(nombre, rl);
+    await comenzarJuego(nombre, rl, modo);
 
   rl.close();
 }
 
 //Funcion generarSecuencia, genera una secuencia de colores aleatoria y la devuelve en un array. El parametro que recibe es el número de colores posibles de la secuencia.
-function generarSecuencia ( numeroColoresSec ) {
+function generarSecuencia ( modo, numeroColoresSec ) {
 
     let contador = 0;
 
-    while(contador != 12){
+    if(modo == tModo.FACIL){
 
-        let entero = parseInt(Math.random() * (4-0) + 0);
+        numeroColoresSec = MAX_COLORES_FACIL;
 
-        let valorColorArray = intToColor(entero);
-        let colorFinal = mostrarColor(valorColorArray);
-        MAX_COLORES_SEQ.push(colorFinal);
+        MAX_COLORES_SEQ = 12
+
+        console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
+
+        while(contador != MAX_COLORES_SEQ){
+
+            let entero = parseInt(Math.random() * (numeroColoresSec-0) + 0);
+
+            let valorColorArray = intToColor(entero);
+            let colorFinal = mostrarColor(valorColorArray);
+            secuenciaGeneral.push(colorFinal);
 
 
-        contador++;
+            contador++;
+
+        }
+
+        return secuenciaGeneral;
+
+    } 
+    else {
+
+        numeroColoresSec = MAX_COLORES_DIFICIL;
+
+        MAX_COLORES_SEQ = 15;
+
+        console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
+
+        while(contador != MAX_COLORES_SEQ){
+
+            let entero = parseInt(Math.random() * (numeroColoresSec-0) + 0);
+
+            let valorColorArray = intToColor(entero);
+            let colorFinal = mostrarColor(valorColorArray);
+            secuenciaGeneral.push(colorFinal);
+
+
+            contador++;
+
+        }
+        
+        return secuenciaGeneral;
 
     }
-
-    return MAX_COLORES_SEQ;
 }
 
 //Funcion intToColor, recibe un número entero y devuelve el valor TColores correspondiente al número.
@@ -68,8 +117,18 @@ function intToColor ( numero ) {
         case 3:
             return tColores.DORADO;
             break;
+        case 4:
+            return tColores.BLANCO;
+            break;
+        case 5:
+            return tColores.MARRON;
+            break;
+        case 6:
+            return tColores.NARANJA;
+            break;
     }
 }
+
 
 //Funcion mostrarColor, recibe un valor TColores como parametro y devuelve el nombre del color correspondiente por consola.
 function mostrarColor(valorTColor){
@@ -86,6 +145,15 @@ function mostrarColor(valorTColor){
             break;
         case tColores.DORADO:
             return "DORADO";
+            break;
+        case tColores.BLANCO:
+            return "BLANCO";
+            break;
+        case tColores.MARRON:
+            return "MARRON";
+            break;
+        case tColores.NARANJA:
+            return "NARANJA";
             break;
     }
 }
@@ -108,6 +176,15 @@ function charToColor ( valorToColor ){
             break;
         case "d":
             return tColores.DORADO;
+            break;
+        case "b":
+            return tColores.BLANCO;
+            break;
+        case "m":
+            return tColores.MARRON;
+            break;
+        case "n":
+            return tColores.NARANJA;
             break;
     }
 }
@@ -141,10 +218,20 @@ function mostrarSecuencia ( secuenciaColores , numero ){
 }
 
 //Funcion comenzarJuego:es la funcion principal del proyecto. Recibe el nombre del jugador y el objeto readline para interactuar con el usuario. Es la funcion que nos mantiene jugando y la que se encarga de llamar a las demas funciones.
-async function comenzarJuego ( nombre , rl ) {
+async function comenzarJuego ( nombre , rl , modo ) {
 
-    const numColores = 4;
-    const secuencia = generarSecuencia(numColores);
+    let secuencia;
+    if (modo == tModo.FACIL) {
+
+        secuencia = generarSecuencia(modo, MAX_COLORES_FACIL);
+
+    }
+    else if (modo == tModo.DIFICIL) {
+
+        secuencia = generarSecuencia(modo, MAX_COLORES_DIFICIL);
+
+    }
+
     let longitudActual = 3;
     let juegoTerminado = false;
     let contadorColores = 1;
