@@ -46,56 +46,24 @@ async function main() {
 }
 
 //Funcion generarSecuencia, genera una secuencia de colores aleatoria y la devuelve en un array. El parametro que recibe es el número de colores posibles de la secuencia.
-function generarSecuencia ( modo, numeroColoresSec ) {
+function generarSecuencia ( modo, numeroColoresSec, longitudSecuencia ) {
 
     let contador = 0;
 
-    if(modo == tModo.FACIL){
+    while(contador != longitudSecuencia){
 
-        numeroColoresSec = MAX_COLORES_FACIL;
+        let entero = parseInt(Math.random() * (numeroColoresSec-0) + 0);
 
-        MAX_COLORES_SEQ = 12
+        let valorColorArray = intToColor(entero);
+        let colorFinal = mostrarColor(valorColorArray);
+        secuenciaGeneral.push(colorFinal);
 
-        // console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
-
-        while(contador != MAX_COLORES_SEQ){
-
-            let entero = parseInt(Math.random() * (numeroColoresSec-0) + 0);
-
-            let valorColorArray = intToColor(entero);
-            let colorFinal = mostrarColor(valorColorArray);
-            secuenciaGeneral.push(colorFinal);
-
-            contador++;
-
-        }
-
-        return secuenciaGeneral;
-
-    } 
-    else {
-
-        numeroColoresSec = MAX_COLORES_DIFICIL;
-
-        MAX_COLORES_SEQ = 15;
-
-        // console.log(modo + " " + numeroColoresSec + " " + MAX_COLORES_SEQ);
-
-        while(contador != MAX_COLORES_SEQ){
-
-            let entero = parseInt(Math.random() * (numeroColoresSec-0) + 0);
-
-            let valorColorArray = intToColor(entero);
-            let colorFinal = mostrarColor(valorColorArray);
-            secuenciaGeneral.push(colorFinal);
-
-            contador++;
-
-        }
-        
-        return secuenciaGeneral;
+        contador++;
 
     }
+
+    return secuenciaGeneral;
+    
 }
 
 //Funcion intToColor, recibe un número entero y devuelve el valor TColores correspondiente al número.
@@ -219,14 +187,19 @@ function mostrarSecuencia ( secuenciaColores , numero ){
 async function comenzarJuego ( nombre , rl , modo ) {
 
     let secuencia;
+    
     if (modo == tModo.FACIL) {
 
-        secuencia = generarSecuencia(modo, MAX_COLORES_FACIL);
+        MAX_COLORES_SEQ = 12;
+
+        secuencia = generarSecuencia(modo, MAX_COLORES_FACIL, MAX_COLORES_SEQ);
 
     }
     else if (modo == tModo.DIFICIL) {
 
-        secuencia = generarSecuencia(modo, MAX_COLORES_DIFICIL);
+        MAX_COLORES_SEQ = 15;
+
+        secuencia = generarSecuencia(modo, MAX_COLORES_DIFICIL, MAX_COLORES_SEQ);
 
     }
 
